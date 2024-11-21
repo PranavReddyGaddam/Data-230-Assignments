@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    <h2>{% block title %} {{ post['title'] }} {% endblock %}</h2>
-    <span class="badge badge-primary">{{ post['created'] }}</span>
+    <h1>{{ post['title'] }}</h1>
     <p>{{ post['content'] }}</p>
+    <p><strong>Result:</strong> {{ post['result'] }}</p>
+    <p><small>Posted on {{ post['created'] }}</small></p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
 {% endblock %}

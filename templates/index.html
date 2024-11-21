@@ -2,33 +2,40 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="text-center mb-4">{% block title %} Lakers 2024-25 Match History {% endblock %}</h1>
+    <!-- Title -->
+    <h1 class="text-center mb-4" style="color: #FDB927;">Lakers 2024-25 Match History</h1>
 
+    <!-- Win-Loss Record -->
     <div class="mb-4">
-        <h4 class="text-center">Win-Loss Record</h4>
+        <h4 class="text-center" style="color: #552583; padding: 10px; border-radius: 5px;font-weight: bold;">Win-Loss Record</h4>
         <div class="d-flex justify-content-center">
-            <span class="badge bg-success me-2">Wins: {{ wins }}</span>
-            <span class="badge bg-danger">Losses: {{ losses }}</span>
+            <span class="badge bg-success me-2" style="font-size: 1.2rem;">Wins: {{ wins }}</span>
+            <span class="badge bg-danger" style="font-size: 1.2rem;">Losses: {{ losses }}</span>
         </div>
     </div>
 
-    {% for post in posts %}
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body">
-            <h2 class="card-title text-primary">
-                <a href="{{ url_for('post', post_id=post['id']) }}" class="text-decoration-none">{{ post['title'] }}</a>
-            </h2>
-            <p>{{ post['content'] }}</p>
-            <div class="d-flex align-items-center justify-content-between">
-                <span class="badge bg-info text-dark">{{ post['created'] }}</span>
-                <!-- Conditional Styling for Win/Loss -->
-                <span class="badge {% if post['result'] == 'Win' %}bg-success{% else %}bg-danger{% endif %}">
-                    {{ post['result'] }}
-                </span>
-                <a href="{{ url_for('edit', id=post['id']) }}" class="btn btn-warning btn-sm">Edit</a>
+    <!-- Match Entries -->
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100" style="border: 2px solid #FDB927;">
+                <div class="card-body" style="background-color: #552583; color: #FFFFFF;">
+                    <h2 class="card-title" style="color: #FDB927;">
+                        <a href="{{ url_for('post', post_id=post['id']) }}" class="text-decoration-none" style="color: #FDB927;">{{ post['title'] }}</a>
+                    </h2>
+                    <p>{{ post['content'] }}</p>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="badge bg-info text-dark">{{ post['created'] }}</span>
+                        <!-- Conditional Styling for Win/Loss -->
+                        <span class="badge {% if post['result'] == 'Win' %}bg-success{% else %}bg-danger{% endif %}">
+                            {{ post['result'] }}
+                        </span>
+                        <a href="{{ url_for('edit', post_id=post['id']) }}" class="btn btn-warning btn-sm" style="color: #552583; font-weight: bold;">Edit</a>
+                    </div>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Add New Match Details {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="title">Teams</label>
+        <input type="text" name="title" placeholder="Lakers vs Suns"
+               class="form-control"
+               value="{{ request.form['title'] }}">
+    </div>
+
+    <div class="form-group">
+        <label for="content">Scores</label>
+        <textarea name="content" placeholder="Enter scores (e.g., 120-115)"
+                  class="form-control">{{ request.form['content'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="result">Result</label>
+        <select name="result" id="result" class="form-control">
+            <option value="Win">Win</option>
+            <option value="Loss">Loss</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+{% endblock %}
